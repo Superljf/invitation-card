@@ -16,6 +16,16 @@ export function EditorForm({ data, onChange }: Props) {
   return (
     <div className="flex flex-col gap-4 w-full max-w-[400px]">
       <div>
+        <label className="block text-sm text-gray-600 mb-1">送呈对象（选填）</label>
+        <input
+          type="text"
+          value={data.recipient}
+          onChange={e => update('recipient', e.target.value)}
+          className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:ring-2 focus:ring-zhong-red/50 focus:border-zhong-red"
+          placeholder="张三先生"
+        />
+      </div>
+      <div>
         <label className="block text-sm text-gray-600 mb-1">新郎姓名</label>
         <input
           type="text"
@@ -65,6 +75,16 @@ export function EditorForm({ data, onChange }: Props) {
         />
       </div>
       <div>
+        <label className="block text-sm text-gray-600 mb-1">典礼类型</label>
+        <input
+          type="text"
+          value={data.eventPhrase}
+          onChange={e => update('eventPhrase', e.target.value)}
+          className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:ring-2 focus:ring-zhong-red/50 focus:border-zhong-red"
+          placeholder="结婚喜宴"
+        />
+      </div>
+      <div>
         <label className="block text-sm text-gray-600 mb-1">典礼用语</label>
         <input
           type="text"
@@ -102,6 +122,16 @@ export function EditorForm({ data, onChange }: Props) {
           onChange={e => update('inviteLine2', e.target.value)}
           className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:ring-2 focus:ring-zhong-red/50 focus:border-zhong-red"
           placeholder="恭请光临"
+        />
+      </div>
+      <div>
+        <label className="block text-sm text-gray-600 mb-1">落款敬语</label>
+        <input
+          type="text"
+          value={data.inviteClosing}
+          onChange={e => update('inviteClosing', e.target.value)}
+          className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:ring-2 focus:ring-zhong-red/50 focus:border-zhong-red"
+          placeholder="敬邀"
         />
       </div>
     </div>

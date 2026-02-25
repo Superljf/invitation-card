@@ -22,7 +22,7 @@ function loadFormData(): FormData {
 function loadTemplate(): TemplateId {
   try {
     const t = localStorage.getItem(TEMPLATE_KEY)
-    if (t === '1' || t === '2' || t === '3') return Number(t) as TemplateId
+    if (['1', '2', '3', '4'].includes(t || '')) return Number(t) as TemplateId
   } catch (_e) {
     /* ignore */
   }
@@ -50,7 +50,7 @@ function App() {
       <div className="flex flex-col lg:flex-row lg:min-h-[calc(100vh-60px)]">
         <aside className="lg:w-[400px] shrink-0 p-4 sm:p-6 bg-white lg:border-r border-gray-200">
           <div className="flex gap-2 mb-4">
-            {([1, 2, 3] as const).map(id => (
+            {([1, 2, 3, 4] as const).map(id => (
               <button
                 key={id}
                 onClick={() => setTemplateId(id)}
@@ -60,7 +60,7 @@ function App() {
                     : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
                 }`}
               >
-                {id === 1 ? '红金对称' : id === 2 ? '竖排传统' : '祥云边框'}
+                {id === 1 ? '古典传统' : id === 2 ? '红金对称' : id === 3 ? '祥云边框' : '竖排中式'}
               </button>
             ))}
           </div>
