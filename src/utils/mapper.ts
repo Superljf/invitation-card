@@ -112,7 +112,7 @@ export function mapToTemplate4(f: FormData): Template4Data {
     recipientVariable: [false, true, false],
     dateLines: [date1, [date2, date3]],
     dateVariable: [true, [true, true]],
-    coupleLines: ['为', [`新郎${f.groom}`, `新娘${f.bride}`], '举行', f.eventPhrase],
+    coupleLines: ['为', [`${f.groom}`, `${f.bride}`], '举行', f.eventPhrase],
     coupleVariable: [false, [true, true], false, true],
     inviteLines: [f.inviteLine1, f.inviteLine2],
     inviteVariable: [false, false],

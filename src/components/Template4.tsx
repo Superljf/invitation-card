@@ -42,12 +42,12 @@ function renderCol(
   )
 }
 
-function renderSimpleCol(lines: string[], variable: boolean[], colClass: string) {
+function renderSimpleCol(lines: string[], variable: boolean[], colClass: string, fontWeight?: string) {
   return (
     <div className={`template4-col ${colClass}`}>
       {lines.map((line, i) => (
         <div key={i} className="template4-line">
-          <div className="template4-line-inner" style={{ ...verticalStyle, color: variable[i] ? '#1a1a1a' : '#F5D26B' }}>{line}</div>
+          <div className="template4-line-inner" style={{ fontWeight: fontWeight, ...verticalStyle, color: variable[i] ? '#1a1a1a' : '#F5D26B' }}>{line}</div>
         </div>
       ))}
     </div>
@@ -56,11 +56,11 @@ function renderSimpleCol(lines: string[], variable: boolean[], colClass: string)
 
 export function Template4({ data }: Props) {
   return (
-    <div className="template4" style={{ width: 'min(400px, 94vw)', height: '660px' }}>
+    <div className="template4" style={{ width: '360px', height: '600px' }}>
       <div className="template4-card">
         <div className="template4-title">{data.title}</div>
         <div className="template4-body">
-          {renderSimpleCol(data.recipientLines, data.recipientVariable, 'template4-col--recipient')}
+          {renderSimpleCol(data.recipientLines, data.recipientVariable, 'template4-col--recipient', 'bold')}
           {renderCol(data.dateLines, data.dateVariable, 'template4-col--date')}
           {renderCol(data.coupleLines, data.coupleVariable, 'template4-col--couple')}
           {renderSimpleCol(data.inviteLines, data.inviteVariable, 'template4-col--invite')}
@@ -76,7 +76,7 @@ export function Template4({ data }: Props) {
                 if (Array.isArray(line)) {
                   return (
                     <div key={i} className="template4-line template4-line--parallel">
-                      <div className="template4-line-inner" style={{ ...verticalStyle, color: lineColor(v, 0) }}>{line[0]}</div>
+                      <div  className="template4-line-inner" style={{ ...verticalStyle, color: lineColor(v, 0), }}>{line[0]}</div>
                       <div className="template4-line-inner" style={{ ...verticalStyle, color: lineColor(v, 1) }}>{line[1]}</div>
                     </div>
                   )

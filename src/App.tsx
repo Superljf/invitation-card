@@ -67,7 +67,7 @@ function App() {
           <EditorForm data={formData} onChange={setFormData} />
         </aside>
 
-        <main className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-auto">
+        <main className="flex-1 flex justify-center p-4 sm:p-6 overflow-auto">
           <Preview formData={formData} templateId={templateId} />
         </main>
       </div>

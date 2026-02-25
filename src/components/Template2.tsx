@@ -6,7 +6,7 @@ interface Props {
 
 export function Template2({ data }: Props) {
   return (
-    <div className="w-[320px] h-[427px] sm:w-[420px] sm:h-[560px] bg-zhong-red rounded-xl shadow-xl p-10 flex flex-col items-center justify-between font-serif text-zhong-gold overflow-hidden">
+    <div className="w-[360px] h-[600px] bg-zhong-red rounded-xl shadow-xl p-10 flex flex-col items-center justify-between font-serif text-zhong-gold overflow-hidden">
       <div className="text-5xl font-bold">囍</div>
       <div className="flex flex-col items-center gap-2 text-sm">
         <div>{data.opening}</div>
