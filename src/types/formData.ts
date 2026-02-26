@@ -13,6 +13,8 @@ export interface FormData {
   inviteLine1: string
   inviteLine2: string
   inviteClosing: string // 敬邀
+  // 字体设置
+  nameFont: string // 姓名字体（收件人、新郎、新娘统一）
 }
 
 export const defaultFormData: FormData = {
@@ -29,4 +31,5 @@ export const defaultFormData: FormData = {
   inviteLine1: '敬备喜筵',
   inviteLine2: '恭请光临',
   inviteClosing: '敬邀',
+  nameFont: "'SimSun', serif",
 }

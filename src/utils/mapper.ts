@@ -45,6 +45,7 @@ export interface Template4Data {
   locationVariable: boolean[]
   signatureLines: LineItem[]
   signatureVariable: VariableItem[]
+  nameFont: string // 姓名字体
 }
 
 /** 模板三：白底祥云款渲染数据 */
@@ -122,6 +123,7 @@ export function mapToTemplate4(f: FormData): Template4Data {
     locationVariable: [false, true],
     signatureLines: [[f.groom, f.bride], f.inviteClosing],
     signatureVariable: [[true, true], false],
+    nameFont: f.nameFont,
   }
 }
 

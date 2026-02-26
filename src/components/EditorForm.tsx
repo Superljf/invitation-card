@@ -46,6 +46,21 @@ export function EditorForm({ data, onChange }: Props) {
         />
       </div>
       <div>
+        <label className="block text-sm text-gray-600 mb-1">姓名字体（收件人、新郎、新娘）</label>
+        <select
+          value={data.nameFont}
+          onChange={e => update('nameFont', e.target.value)}
+          className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:ring-2 focus:ring-zhong-red/50 focus:border-zhong-red"
+        >
+          <option value="'SimSun', serif">宋体</option>
+          <option value="'FangSong', serif">仿宋</option>
+          <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
+          <option value="'SimHei', sans-serif">黑体</option>
+          <option value="'KaiTi', serif">楷体</option>
+          <option value="'LiSu', serif">隶书</option>
+        </select>
+      </div>
+      <div>
         <label className="block text-sm text-gray-600 mb-1">婚礼日期（公历）</label>
         <input
           type="date"
@@ -134,6 +149,7 @@ export function EditorForm({ data, onChange }: Props) {
           placeholder="敬邀"
         />
       </div>
+  
     </div>
   )
 }
