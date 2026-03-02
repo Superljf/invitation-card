@@ -1,0 +1,9 @@
+com\invitation\config\CorsConfig.class
+com\invitation\InvitationCardApplication.class
+com\invitation\dto\FormDataDto.class
+com\invitation\service\InvitationService.class
+com\invitation\dto\InvitationResponse.class
+com\invitation\controller\InvitationController.class
+com\invitation\model\InvitationRecord.class
+com\invitation\dto\SaveRequest.class
+com\invitation\dto\SaveResponse.class
