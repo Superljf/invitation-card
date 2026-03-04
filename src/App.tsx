@@ -98,93 +98,109 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-zhong-red text-zhong-gold py-4 text-center">
-        <h1 className="text-xl font-serif font-bold">中式婚礼请柬生成器</h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-100">
+      <header className="sticky top-0 z-10 backdrop-blur-md bg-white/70 border-b border-gray-200/50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <h1 className="text-xl font-semibold text-gray-800 tracking-tight">
+            中式婚礼请柬生成器
+          </h1>
+          <p className="text-sm text-gray-500 mt-0.5">在线定制 · 传统雅致</p>
+        </div>
       </header>
 
-      <div className="flex flex-col lg:flex-row lg:min-h-[calc(100vh-60px)]">
-        <aside className="lg:w-[400px] shrink-0 p-4 sm:p-6 bg-white lg:border-r border-gray-200">
-          <div className="flex gap-2 mb-4">
-            {([1, 2, 3, 4] as const).map(id => (
-              <button
-                key={id}
-                onClick={() => setTemplateId(id)}
-                className={`px-3 py-1.5 rounded text-sm ${
-                  templateId === id
-                    ? 'bg-zhong-red text-zhong-gold'
-                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                }`}
-              >
-                {id === 1 ? '古典传统' : id === 2 ? '红金对称' : id === 3 ? '祥云边框' : '竖排中式'}
-              </button>
-            ))}
-          </div>
+      <div className="flex flex-col lg:flex-row lg:min-h-[calc(100vh-72px)] gap-4 lg:gap-6 p-4 sm:p-6">
+        <aside className="lg:w-[400px] shrink-0 flex flex-col">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-soft border border-gray-100 p-5 sm:p-6 overflow-y-auto flex-1">
+            <section className="mb-6">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">模板风格</p>
+              <div className="flex flex-wrap gap-2">
+                {([1, 2, 3, 4] as const).map(id => (
+                  <button
+                    key={id}
+                    onClick={() => setTemplateId(id)}
+                    className={`chip ${
+                      templateId === id
+                        ? 'bg-accent text-white shadow-glow'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    {id === 1 ? '古典传统' : id === 2 ? '红金对称' : id === 3 ? '祥云边框' : '竖排中式'}
+                  </button>
+                ))}
+              </div>
+            </section>
 
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={handleSave}
-              disabled={saveStatus === 'loading'}
-              className="px-4 py-2 rounded-lg bg-zhong-red text-zhong-gold text-sm font-medium hover:opacity-90 disabled:opacity-60"
-            >
-              {saveStatus === 'loading' ? '保存中...' : '保存到云端'}
-            </button>
-            <button
-              onClick={handleLoadList}
-              className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm hover:bg-gray-50"
-            >
-              {listOpen ? '收起列表' : '请柬列表'}
-            </button>
-          </div>
-
-          {saveStatus === 'ok' && savedId && (
-            <div className="mb-4 p-3 rounded-lg bg-green-50 border border-green-200">
-              <p className="text-sm text-green-800 mb-2">保存成功，分享链接：</p>
+            <section className="mb-6">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">云端操作</p>
               <div className="flex gap-2">
-                <input
-                  readOnly
-                  value={`${location.origin}${location.pathname}?id=${savedId}`}
-                  className="flex-1 px-2 py-1 text-xs border rounded bg-white"
-                />
                 <button
-                  onClick={handleCopyLink}
-                  className="px-2 py-1 rounded bg-zhong-red text-zhong-gold text-xs"
+                  onClick={handleSave}
+                  disabled={saveStatus === 'loading'}
+                  className="btn-primary flex-1"
                 >
-                  复制
+                  {saveStatus === 'loading' ? '保存中...' : '保存到云端'}
+                </button>
+                <button
+                  onClick={handleLoadList}
+                  className="btn-ghost"
+                >
+                  {listOpen ? '收起' : '请柬列表'}
                 </button>
               </div>
-            </div>
-          )}
-          {saveStatus === 'err' && (
-            <p className="mb-4 text-sm text-red-600">保存失败，请检查后端是否启动</p>
-          )}
+            </section>
 
-          {listOpen && (
-            <div className="mb-4 max-h-48 overflow-auto border rounded-lg border-gray-200">
-              {listLoading ? (
-                <p className="p-4 text-sm text-gray-500">加载中...</p>
-              ) : list.length === 0 ? (
-                <p className="p-4 text-sm text-gray-500">暂无请柬</p>
-              ) : (
-                <ul className="divide-y">
-                  {list.map(item => (
-                    <li
-                      key={item.id}
-                      onClick={() => handleSelectInvitation(item)}
-                      className="px-4 py-3 text-sm cursor-pointer hover:bg-gray-50"
-                    >
-                      {item.formData.groom} & {item.formData.bride} · {item.formData.solarDate}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          )}
+            {saveStatus === 'ok' && savedId && (
+              <div className="mb-6 p-4 rounded-xl bg-emerald-50/80 border border-emerald-200/60">
+                <p className="text-sm font-medium text-emerald-800 mb-2">✓ 保存成功，分享链接</p>
+                <div className="flex gap-2">
+                  <input
+                    readOnly
+                    value={`${location.origin}${location.pathname}?id=${savedId}`}
+                    className="flex-1 px-3 py-2 text-xs rounded-lg border border-emerald-200 bg-white"
+                  />
+                  <button
+                    onClick={handleCopyLink}
+                    className="btn-primary text-xs px-3 py-2"
+                  >
+                    复制
+                  </button>
+                </div>
+              </div>
+            )}
+            {saveStatus === 'err' && (
+              <p className="mb-6 text-sm text-rose-600">保存失败，请检查后端是否启动</p>
+            )}
 
-          <EditorForm data={formData} onChange={setFormData} />
+            {listOpen && (
+              <div className="mb-6 max-h-48 overflow-auto rounded-xl border border-gray-200/80 bg-gray-50/50">
+                {listLoading ? (
+                  <p className="p-4 text-sm text-gray-500">加载中...</p>
+                ) : list.length === 0 ? (
+                  <p className="p-4 text-sm text-gray-500">暂无请柬</p>
+                ) : (
+                  <ul className="divide-y divide-gray-100">
+                    {list.map(item => (
+                      <li
+                        key={item.id}
+                        onClick={() => handleSelectInvitation(item)}
+                        className="px-4 py-3 text-sm cursor-pointer hover:bg-white/80 transition-colors"
+                      >
+                        {item.formData.groom} & {item.formData.bride} · {item.formData.solarDate}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+
+            <section>
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">编辑内容</p>
+              <EditorForm data={formData} onChange={setFormData} />
+            </section>
+          </div>
         </aside>
 
-        <main className="flex-1 flex justify-center p-4 sm:p-6 overflow-auto">
+        <main className="flex-1 flex justify-center items-start p-4 sm:p-6 overflow-auto min-h-0">
           <Preview formData={formData} templateId={templateId} />
         </main>
       </div>
