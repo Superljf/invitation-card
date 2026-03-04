@@ -100,7 +100,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-100">
       <header className="sticky top-0 z-10 backdrop-blur-md bg-white/70 border-b border-gray-200/50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="px-4 sm:px-6 py-4">
           <h1 className="text-xl font-semibold text-gray-800 tracking-tight">
             中式婚礼请柬生成器
           </h1>
