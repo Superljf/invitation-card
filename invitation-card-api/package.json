@@ -1,0 +1,12 @@
+{
+  "name": "invitation-card-api",
+  "version": "1.0.0",
+  "description": "中式婚礼请柬后端 API，Spring Boot 2.2.5 + JDK 8 + MySQL。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

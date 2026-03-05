@@ -4,7 +4,20 @@ server:
 spring:
   application:
     name: invitation-card-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/invitation_db?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: your_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        format_sql: true
 
-# CORS 允许的前端地址，多个用逗号分隔，生产环境请改为实际域名
+# CORS 允许的前端地址
 cors:
   allowed-origins: http://localhost:5173,http://127.0.0.1:5173

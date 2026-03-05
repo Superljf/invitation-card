@@ -1,6 +1,26 @@
 # invitation-card-api
 
-中式婚礼请柬后端 API，Spring Boot 2.2.5 + JDK 8。
+中式婚礼请柬后端 API，Spring Boot 2.2.5 + JDK 8 + MySQL。
+
+## 数据库初始化
+
+1. 创建数据库并导入表结构：
+
+```bash
+mysql -u root -p < sql/init.sql
+```
+
+或使用 Navicat / MySQL Workbench 执行 `sql/init.sql` 内容。
+
+2. 修改 `src/main/resources/application.yml` 中的数据库连接：
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/invitation_db?...
+    username: root
+    password: 你的密码
+```
 
 ## 运行
 
@@ -8,7 +28,7 @@
 mvn spring-boot:run
 ```
 
-服务默认启动在 http://localhost:8080
+服务默认启动在 http://localhost:8089
 
 ## API
 
