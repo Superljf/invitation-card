@@ -1,0 +1,126 @@
+/* 模板4 竖排请柬 - 可直接改此类名下的样式 */
+.template4 {
+  background: #8b0000;
+  color: #f5d26b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.template4-card {
+  flex: 1;
+  padding: 16px 14px;
+  border: 2px solid rgba(212, 175, 55, 0.7);
+  border-style: double;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+  overflow: visible;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.template4-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 4rem;
+  flex-shrink: 0;
+  font-family: serif;
+  letter-spacing: 6px;
+}
+
+.template4-body {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: stretch;
+  gap: 12px 14px;
+  flex-wrap: nowrap;
+  overflow: visible;
+  min-height: 0;
+  min-width: 0;
+  flex: 1;
+  width: 100%;
+}
+
+.template4-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px 6px;
+  flex-shrink: 0;
+  font-family: serif;
+  font-size: 1rem;
+  justify-content: flex-start;
+}
+
+.template4-col--recipient {
+  flex-shrink: 0;
+  font-size: 1.125rem;
+}
+
+.template4-col--date {
+  font-size: 0.875rem;
+}
+
+.template4-col--couple {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.template4-col--invite {
+  font-size: 1rem;
+  gap: 5rem;
+}
+
+.template4-group-time-location-signature {
+  display: flex;
+  flex-direction: column;
+  gap: 8px 0;
+  align-items: flex-start;
+  flex-shrink: 0;
+  min-height: 0;
+  justify-content: space-between;
+  height: 80%;
+}
+
+.template4-row-time-location {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 12px 14px;
+  flex-shrink: 0;
+}
+
+.template4-row-time-location .template4-col {
+  flex-shrink: 0;
+  font-size: 0.875rem;
+}
+
+.template4-block--signature {
+  display: flex;
+  flex-direction: column;
+  gap: 16px 6px;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  margin-top: auto;
+}
+
+.template4-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.template4-line--parallel {
+  flex-direction: row;
+  justify-content: center;
+  gap: 6px 8px;
+}
+
+.template4-line-inner {
+  line-height: 1.8;
+  letter-spacing: 2px;
+}
