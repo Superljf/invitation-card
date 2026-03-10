@@ -62,8 +62,11 @@ API 与数据库表结构完全兼容，可与原版共用同一 MySQL `invitati
 | 方法 | 路径 | 说明 |
 |------|------|------|
 | POST | /api/invitations | 保存请柬，Body: `{ formData, templateId }`，返回 `{ id }` |
-| GET | /api/invitations?page=1&pageSize=10 | 分页获取请柬列表 |
+| GET | /api/invitations?page=1&pageSize=10&templateId=1 | 分页列表，可选 `templateId` 筛选，返回 `{ list, total, page, pageSize, totalPages }` |
 | GET | /api/invitations/{id} | 按 id 获取请柬 |
+| PUT | /api/invitations/{id} | 全量更新，Body: `{ formData, templateId? }` |
+| PATCH | /api/invitations/{id} | 部分更新，Body: `{ formData?, templateId? }` |
+| DELETE | /api/invitations/{id} | 删除请柬，返回 204 |
 
 ## 部署
 

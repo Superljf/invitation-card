@@ -101,9 +101,9 @@ export default function HomePage() {
     if (!listOpen && list.length === 0) {
       setListLoading(true)
       fetch('/api/invitations?page=1&pageSize=20')
-        .then(res => res.ok ? res.json() : [])
+        .then(res => res.ok ? res.json() : { list: [] })
         .then(data => {
-          setList(data)
+          setList(Array.isArray(data.list) ? data.list : [])
           setListLoading(false)
         })
         .catch(() => setListLoading(false))
