@@ -103,14 +103,14 @@ export function Template4({ data }: Props) {
                       <div className="template4-line-inner" style={{ 
                         fontFamily: data.nameFont,
                         fontWeight: 'bold',
-                        fontSize: '1.25rem',
+                        fontSize: '1.5rem',
                         ...verticalStyle, 
                         color: lineColor(v, 0) 
                       }}>{line[0]}</div>
                       <div className="template4-line-inner" style={{ 
                         fontFamily: data.nameFont,
                         fontWeight: 'bold',
-                        fontSize: '1.25rem',
+                        fontSize: '1.5rem',
                         ...verticalStyle, 
                         color: lineColor(v, 1) 
                       }}>{line[1]}</div>

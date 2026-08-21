@@ -71,6 +71,10 @@
   font-weight: 600;
 }
 
+.template4-col--couple .template4-line--parallel .template4-line-inner {
+  font-size: 1rem;
+}
+
 .template4-col--invite {
   font-size: 1rem;
   gap: 5rem;
