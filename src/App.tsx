@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { EditorForm } from './components/EditorForm'
 import { Preview, type TemplateId } from './components/Preview'
 import { mergeFormData, type FormData } from './types/formData'
-import { downloadNodeAsPng } from './utils/downloadImage'
+import { downloadNodeAsPng, isWeChat } from './utils/downloadImage'
 // import {
 //   saveInvitation,
 //   getInvitation,
@@ -44,6 +44,7 @@ function App() {
   // const [list, setList] = useState<InvitationResponse[]>([])
   // const [listLoading, setListLoading] = useState(false)
   const [downloadStatus, setDownloadStatus] = useState<'idle' | 'loading' | 'err'>('idle')
+  const [wechatImage, setWechatImage] = useState<string | null>(null)
   const previewRef = useRef<HTMLDivElement>(null)
 
   // useEffect(() => {
@@ -103,8 +104,9 @@ function App() {
     if (!previewRef.current) return
     setDownloadStatus('loading')
     try {
-      const filename = `请柬-${formData.groom}-${formData.bride}.png`
-      await downloadNodeAsPng(previewRef.current, filename)
+      const filename = `请柬-${formData.groom}-${formData.bride}.jpg`
+      const wechatUrl = await downloadNodeAsPng(previewRef.current, filename)
+      if (wechatUrl) setWechatImage(wechatUrl)
       setDownloadStatus('idle')
     } catch (e) {
       if (e instanceof DOMException && e.name === 'AbortError') {
@@ -237,10 +239,35 @@ function App() {
               {downloadStatus === 'err' && (
                 <p className="mt-2 text-sm text-center text-rose-600">下载失败，请重试</p>
               )}
+              <p className="mt-2 text-xs text-center text-gray-500">
+                {isWeChat() ? '请长按图片保存，发微信时打开「原图」' : '发微信请打开「原图」，否则会被压缩变糊'}
+              </p>
             </div>
           </div>
         </main>
       </div>
+
+      {wechatImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-4"
+          onClick={() => setWechatImage(null)}
+        >
+          <p className="text-white text-sm mb-3">长按图片保存到相册，发送时请选「原图」</p>
+          <img
+            src={wechatImage}
+            alt="请柬"
+            className="max-h-[72vh] max-w-full rounded-lg"
+            onClick={e => e.stopPropagation()}
+          />
+          <button
+            type="button"
+            className="mt-4 btn-ghost text-white bg-white/20"
+            onClick={() => setWechatImage(null)}
+          >
+            关闭
+          </button>
+        </div>
+      )}
     </div>
   )
 }
