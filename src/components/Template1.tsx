@@ -24,7 +24,7 @@ export function Template1({ data }: Props) {
         <div>{data.inviteText[0]}</div>
         <div>{data.inviteText[1]}</div>
       </div>
-      <div className="text-sm text-center space-y-0.5 mt-2">
+      <div className="text-sm text-center space-y-0.5 mt-2" style={{ fontSize: data.timeLocationFontSize }}>
         <div>{data.location}</div>
         <div>{data.time}</div>
       </div>

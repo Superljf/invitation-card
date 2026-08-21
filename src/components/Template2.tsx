@@ -18,8 +18,8 @@ export function Template2({ data }: Props) {
         <div className="mt-2">{data.ceremony}</div>
         <div>{data.invite[0]}</div>
         <div>{data.invite[1]}</div>
-        <div className="mt-2">{data.location}</div>
-        <div>{data.time}</div>
+        <div className="mt-2" style={{ fontSize: data.timeLocationFontSize }}>{data.location}</div>
+        <div style={{ fontSize: data.timeLocationFontSize }}>{data.time}</div>
       </div>
       <div className="text-zhong-gold/50 text-xl">～～～</div>
     </div>

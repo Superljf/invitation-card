@@ -64,7 +64,7 @@ function renderCol(
   )
 }
 
-function renderSimpleCol(lines: string[], variable: boolean[], colClass: string, fontWeight?: string, customFont?: string) {
+function renderSimpleCol(lines: string[], variable: boolean[], colClass: string, fontWeight?: string, customFont?: string, fontSize?: string) {
   return (
     <div className={`template4-col ${colClass}`}>
       {lines.map((line, i) => (
@@ -72,6 +72,7 @@ function renderSimpleCol(lines: string[], variable: boolean[], colClass: string,
           <div className="template4-line-inner" style={{ 
             fontWeight: fontWeight, 
             fontFamily: customFont,
+            fontSize: fontSize,
             ...verticalStyle, 
             color: variable[i] ? '#1a1a1a' : '#F5D26B' 
           }}>{line}</div>
@@ -94,8 +95,8 @@ export function Template4({ data }: Props) {
           {/* 时间、地点 两列，落款在它们下方 */}
           <div className="template4-group-time-location-signature">
             <div className="template4-row-time-location">
-              {renderSimpleCol(data.timeLines, data.timeVariable, 'template4-col--time')}
-              {renderSimpleCol(data.locationLines, data.locationVariable, 'template4-col--location')}
+              {renderSimpleCol(data.timeLines, data.timeVariable, 'template4-col--time', undefined, undefined, data.timeLocationFontSize)}
+              {renderSimpleCol(data.locationLines, data.locationVariable, 'template4-col--location', undefined, undefined, data.timeLocationFontSize)}
             </div>
             <div className="template4-block template4-block--signature">
               {data.signatureLines.map((line, i) => {

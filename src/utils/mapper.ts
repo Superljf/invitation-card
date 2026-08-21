@@ -11,6 +11,7 @@ export interface Template1Data {
   inviteText: [string, string]
   location: string
   time: string
+  timeLocationFontSize: string
 }
 
 /** 模板二：竖排传统款渲染数据 */
@@ -23,6 +24,7 @@ export interface Template2Data {
   invite: [string, string]
   location: string
   time: string
+  timeLocationFontSize: string
 }
 
 /** 模板四：竖排款，支持并列（公历|农历、新郎|新娘） */
@@ -49,6 +51,7 @@ export interface Template4Data {
   nameFont: string // 姓名字体
   coupleFontSize: string // 新郎新娘字号
   inviteNameFontSize: string // 敬邀人字号
+  timeLocationFontSize: string // 时间、地点字号
 }
 
 /** 模板三：白底祥云款渲染数据 */
@@ -61,6 +64,7 @@ export interface Template3Data {
   ceremonyText: string
   inviteLine: string
   time: string
+  timeLocationFontSize: string
 }
 
 function formatSolarChinese(dateStr: string, weekday: string): string {
@@ -90,6 +94,7 @@ export function mapToTemplate1(f: FormData): Template1Data {
     inviteText: [f.inviteLine1, f.inviteLine2],
     location: `席设：${f.location}`,
     time: `时间：${f.time}`,
+    timeLocationFontSize: f.timeLocationFontSize,
   }
 }
 
@@ -103,6 +108,7 @@ export function mapToTemplate2(f: FormData): Template2Data {
     invite: [f.inviteLine1, f.inviteLine2],
     location: f.location,
     time: f.time,
+    timeLocationFontSize: f.timeLocationFontSize,
   }
 }
 
@@ -131,6 +137,7 @@ export function mapToTemplate4(f: FormData): Template4Data {
     nameFont: f.nameFont,
     coupleFontSize: f.coupleFontSize,
     inviteNameFontSize: f.inviteNameFontSize,
+    timeLocationFontSize: f.timeLocationFontSize,
   }
 }
 
@@ -146,5 +153,6 @@ export function mapToTemplate3(f: FormData): Template3Data {
     ceremonyText: f.ceremonyText,
     inviteLine: `${f.inviteLine1}  ${f.inviteLine2}`,
     time: `时间：${f.time}`,
+    timeLocationFontSize: f.timeLocationFontSize,
   }
 }

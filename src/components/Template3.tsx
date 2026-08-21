@@ -15,11 +15,11 @@ export function Template3({ data }: Props) {
         <div>{data.lunar}</div>
       </div>
       <div className="text-center text-zhong-red text-sm">
-        <div>{data.locationLine}</div>
+        <div style={{ fontSize: data.timeLocationFontSize }}>{data.locationLine}</div>
         <div>{data.ceremonyText}</div>
       </div>
       <div className="text-zhong-gold font-medium">{data.inviteLine}</div>
-      <div className="text-zhong-red text-sm">{data.time}</div>
+      <div className="text-zhong-red text-sm" style={{ fontSize: data.timeLocationFontSize }}>{data.time}</div>
       <div className="text-zhong-red/30 text-lg">～～～～～～～</div>
     </div>
   )

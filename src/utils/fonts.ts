@@ -13,7 +13,7 @@ export const NAME_FONT_OPTIONS = [
   { label: '隶书', value: FONT_LISU },
 ] as const
 
-/** 姓名字号，对应目前新郎新娘偏小、敬邀人偏大的默认 */
+/** 姓名字号，默认中号 */
 export const FONT_SIZE_OPTIONS = [
   { label: '较小', value: '0.875rem' },
   { label: '小', value: '1rem' },
@@ -25,6 +25,7 @@ export const FONT_SIZE_OPTIONS = [
 
 export const DEFAULT_COUPLE_FONT_SIZE = '1.125rem'
 export const DEFAULT_INVITE_NAME_FONT_SIZE = '1.125rem'
+export const DEFAULT_TIME_LOCATION_FONT_SIZE = '1.125rem'
 
 const LEGACY_FONT_MAP: Record<string, string> = {
   "'SimSun', serif": FONT_SONG,

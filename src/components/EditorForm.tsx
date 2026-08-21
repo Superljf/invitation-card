@@ -36,7 +36,7 @@ export function EditorForm({ data, onChange }: Props) {
           value={data.honoree}
           onChange={e => update('honoree', e.target.value)}
           className="input-modern"
-          placeholder="我儿"
+          placeholder="如：我儿、小女"
         />
       </div>
       <div>
@@ -173,6 +173,18 @@ export function EditorForm({ data, onChange }: Props) {
           className="input-modern"
           placeholder="中午十二时整"
         />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">时间地点字号</label>
+        <select
+          value={data.timeLocationFontSize}
+          onChange={e => update('timeLocationFontSize', e.target.value)}
+          className="input-modern"
+        >
+          {FONT_SIZE_OPTIONS.map(opt => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">敬邀语 第一行</label>
