@@ -1,4 +1,4 @@
-import { FONT_HEITI, normalizeNameFont } from '../utils/fonts'
+import { FONT_HEITI, normalizeNameFont, DEFAULT_COUPLE_FONT_SIZE, DEFAULT_INVITE_NAME_FONT_SIZE } from '../utils/fonts'
 
 /** 统一编辑层数据类型 */
 export interface FormData {
@@ -20,6 +20,8 @@ export interface FormData {
   inviteClosing: string // 敬邀
   // 字体设置
   nameFont: string // 姓名字体（收件人、新郎、新娘统一）
+  coupleFontSize: string // 新郎新娘字号
+  inviteNameFontSize: string // 敬邀人字号
 }
 
 export const defaultFormData: FormData = {
@@ -40,6 +42,8 @@ export const defaultFormData: FormData = {
   inviteLine2: '恭请光临',
   inviteClosing: '敬邀',
   nameFont: FONT_HEITI,
+  coupleFontSize: DEFAULT_COUPLE_FONT_SIZE,
+  inviteNameFontSize: DEFAULT_INVITE_NAME_FONT_SIZE,
 }
 
 /** 合并请柬数据；旧数据没有敬邀姓名时，回退到新郎/新娘姓名 */
@@ -53,5 +57,7 @@ export function mergeFormData(partial?: Partial<FormData> | null): FormData {
     merged.inviteName2 = merged.bride || defaultFormData.inviteName2
   }
   merged.nameFont = normalizeNameFont(merged.nameFont)
+  if (!merged.coupleFontSize) merged.coupleFontSize = DEFAULT_COUPLE_FONT_SIZE
+  if (!merged.inviteNameFontSize) merged.inviteNameFontSize = DEFAULT_INVITE_NAME_FONT_SIZE
   return merged
 }

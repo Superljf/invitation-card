@@ -24,6 +24,10 @@ public class FormDataDto {
     private String inviteLine2;
     private String inviteClosing;
     private String nameFont;
+    /** 新郎新娘字号 */
+    private String coupleFontSize;
+    /** 敬邀人字号 */
+    private String inviteNameFontSize;
 
     public String getRecipient() {
         return recipient;
@@ -159,5 +163,21 @@ public class FormDataDto {
 
     public void setNameFont(String nameFont) {
         this.nameFont = nameFont;
+    }
+
+    public String getCoupleFontSize() {
+        return coupleFontSize;
+    }
+
+    public void setCoupleFontSize(String coupleFontSize) {
+        this.coupleFontSize = coupleFontSize;
+    }
+
+    public String getInviteNameFontSize() {
+        return inviteNameFontSize;
+    }
+
+    public void setInviteNameFontSize(String inviteNameFontSize) {
+        this.inviteNameFontSize = inviteNameFontSize;
     }
 }

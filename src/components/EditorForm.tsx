@@ -1,6 +1,6 @@
 import type { FormData } from '../types/formData'
 import { getWeekday } from '../utils/weekday'
-import { NAME_FONT_OPTIONS } from '../utils/fonts'
+import { NAME_FONT_OPTIONS, FONT_SIZE_OPTIONS } from '../utils/fonts'
 
 interface Props {
   data: FormData
@@ -88,6 +88,30 @@ export function EditorForm({ data, onChange }: Props) {
         >
           {NAME_FONT_OPTIONS.map(opt => (
             <option key={opt.label} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">新郎新娘字号</label>
+        <select
+          value={data.coupleFontSize}
+          onChange={e => update('coupleFontSize', e.target.value)}
+          className="input-modern"
+        >
+          {FONT_SIZE_OPTIONS.map(opt => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">敬邀人字号</label>
+        <select
+          value={data.inviteNameFontSize}
+          onChange={e => update('inviteNameFontSize', e.target.value)}
+          className="input-modern"
+        >
+          {FONT_SIZE_OPTIONS.map(opt => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
           ))}
         </select>
       </div>

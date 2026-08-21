@@ -47,6 +47,8 @@ export interface Template4Data {
   signatureLines: LineItem[]
   signatureVariable: VariableItem[]
   nameFont: string // 姓名字体
+  coupleFontSize: string // 新郎新娘字号
+  inviteNameFontSize: string // 敬邀人字号
 }
 
 /** 模板三：白底祥云款渲染数据 */
@@ -127,6 +129,8 @@ export function mapToTemplate4(f: FormData): Template4Data {
     signatureLines: [[f.inviteName1, f.inviteName2], f.inviteClosing],
     signatureVariable: [[true, true], false],
     nameFont: f.nameFont,
+    coupleFontSize: f.coupleFontSize,
+    inviteNameFontSize: f.inviteNameFontSize,
   }
 }
 

@@ -20,7 +20,8 @@ function renderCol(
   variable: VariableItem[],
   colClass: string,
   customFont?: string,
-  boldPrefix?: string
+  boldPrefix?: string,
+  parallelFontSize?: string
 ) {
   return (
     <div className={`template4-col ${colClass}`}>
@@ -31,11 +32,13 @@ function renderCol(
             <div key={i} className="template4-line template4-line--parallel">
               <div className="template4-line-inner" style={{ 
                 fontFamily: customFont,
+                fontSize: parallelFontSize,
                 ...verticalStyle, 
                 color: lineColor(v, 0) 
               }}>{line[0]}</div>
               <div className="template4-line-inner" style={{ 
                 fontFamily: customFont,
+                fontSize: parallelFontSize,
                 ...verticalStyle, 
                 color: lineColor(v, 1) 
               }}>{line[1]}</div>
@@ -86,7 +89,7 @@ export function Template4({ data }: Props) {
         <div className="template4-body">
           {renderSimpleCol(data.recipientLines, data.recipientVariable, 'template4-col--recipient', 'bold', data.nameFont)}
           {renderCol(data.dateLines, data.dateVariable, 'template4-col--date', undefined, data.honoree)}
-          {renderCol(data.coupleLines, data.coupleVariable, 'template4-col--couple', data.nameFont)}
+          {renderCol(data.coupleLines, data.coupleVariable, 'template4-col--couple', data.nameFont, undefined, data.coupleFontSize)}
           {renderSimpleCol(data.inviteLines, data.inviteVariable, 'template4-col--invite')}
           {/* 时间、地点 两列，落款在它们下方 */}
           <div className="template4-group-time-location-signature">
@@ -103,14 +106,14 @@ export function Template4({ data }: Props) {
                       <div className="template4-line-inner" style={{ 
                         fontFamily: data.nameFont,
                         fontWeight: 'bold',
-                        fontSize: '1.5rem',
+                        fontSize: data.inviteNameFontSize,
                         ...verticalStyle, 
                         color: lineColor(v, 0) 
                       }}>{line[0]}</div>
                       <div className="template4-line-inner" style={{ 
                         fontFamily: data.nameFont,
                         fontWeight: 'bold',
-                        fontSize: '1.5rem',
+                        fontSize: data.inviteNameFontSize,
                         ...verticalStyle, 
                         color: lineColor(v, 1) 
                       }}>{line[1]}</div>
