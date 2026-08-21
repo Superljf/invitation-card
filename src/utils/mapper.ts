@@ -121,7 +121,7 @@ export function mapToTemplate4(f: FormData): Template4Data {
     timeVariable: [false, true],
     locationLines: ['席设', f.location],
     locationVariable: [false, true],
-    signatureLines: [[f.groom, f.bride], f.inviteClosing],
+    signatureLines: [[f.inviteName1, f.inviteName2], f.inviteClosing],
     signatureVariable: [[true, true], false],
     nameFont: f.nameFont,
   }

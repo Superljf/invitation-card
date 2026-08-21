@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { EditorForm } from './components/EditorForm'
 import { Preview, type TemplateId } from './components/Preview'
-import { defaultFormData, type FormData } from './types/formData'
-import {
-  saveInvitation,
-  getInvitation,
-  getAllInvitations,
-  type InvitationResponse,
-} from './api/invitation'
+import { mergeFormData, type FormData } from './types/formData'
+import { downloadNodeAsPng } from './utils/downloadImage'
+// import {
+//   saveInvitation,
+//   getInvitation,
+//   getAllInvitations,
+//   type InvitationResponse,
+// } from './api/invitation'
 
 const STORAGE_KEY = 'invitation-form-data'
 const TEMPLATE_KEY = 'invitation-template'
@@ -16,13 +17,12 @@ function loadFormData(): FormData {
   try {
     const s = localStorage.getItem(STORAGE_KEY)
     if (s) {
-      const parsed = JSON.parse(s) as FormData
-      return { ...defaultFormData, ...parsed }
+      return mergeFormData(JSON.parse(s) as Partial<FormData>)
     }
   } catch (_e) {
     /* ignore */
   }
-  return { ...defaultFormData }
+  return mergeFormData()
 }
 
 function loadTemplate(): TemplateId {
@@ -38,23 +38,25 @@ function loadTemplate(): TemplateId {
 function App() {
   const [formData, setFormData] = useState<FormData>(loadFormData)
   const [templateId, setTemplateId] = useState<TemplateId>(loadTemplate)
-  const [savedId, setSavedId] = useState<string | null>(null)
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'loading' | 'ok' | 'err'>('idle')
-  const [listOpen, setListOpen] = useState(false)
-  const [list, setList] = useState<InvitationResponse[]>([])
-  const [listLoading, setListLoading] = useState(false)
+  // const [savedId, setSavedId] = useState<string | null>(null)
+  // const [saveStatus, setSaveStatus] = useState<'idle' | 'loading' | 'ok' | 'err'>('idle')
+  // const [listOpen, setListOpen] = useState(false)
+  // const [list, setList] = useState<InvitationResponse[]>([])
+  // const [listLoading, setListLoading] = useState(false)
+  const [downloadStatus, setDownloadStatus] = useState<'idle' | 'loading' | 'err'>('idle')
+  const previewRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const id = new URLSearchParams(location.search).get('id')
-    if (id) {
-      getInvitation(id).then(res => {
-        if (res) {
-          setFormData({ ...defaultFormData, ...res.formData })
-          setTemplateId(res.templateId as TemplateId)
-        }
-      }).catch(() => {})
-    }
-  }, [])
+  // useEffect(() => {
+  //   const id = new URLSearchParams(location.search).get('id')
+  //   if (id) {
+  //     getInvitation(id).then(res => {
+  //       if (res) {
+  //         setFormData(mergeFormData(res.formData))
+  //         setTemplateId(res.templateId as TemplateId)
+  //       }
+  //     }).catch(() => {})
+  //   }
+  // }, [])
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
@@ -64,42 +66,59 @@ function App() {
     localStorage.setItem(TEMPLATE_KEY, String(templateId))
   }, [templateId])
 
-  const handleSave = async () => {
-    setSaveStatus('loading')
+  // const handleSave = async () => {
+  //   setSaveStatus('loading')
+  //   try {
+  //     const { id } = await saveInvitation(formData, templateId)
+  //     setSavedId(id)
+  //     setSaveStatus('ok')
+  //   } catch {
+  //     setSaveStatus('err')
+  //   }
+  // }
+
+  // const handleCopyLink = () => {
+  //   const url = `${location.origin}${location.pathname}?id=${savedId}`
+  //   navigator.clipboard.writeText(url)
+  // }
+
+  // const handleLoadList = () => {
+  //   if (!listOpen && list.length === 0) {
+  //     setListLoading(true)
+  //     getAllInvitations().then(data => {
+  //       setList(data)
+  //       setListLoading(false)
+  //     }).catch(() => setListLoading(false))
+  //   }
+  //   setListOpen(!listOpen)
+  // }
+
+  // const handleSelectInvitation = (item: InvitationResponse) => {
+  //   setFormData(mergeFormData(item.formData))
+  //   setTemplateId(item.templateId as TemplateId)
+  //   setListOpen(false)
+  // }
+
+  const handleDownload = async () => {
+    if (!previewRef.current) return
+    setDownloadStatus('loading')
     try {
-      const { id } = await saveInvitation(formData, templateId)
-      setSavedId(id)
-      setSaveStatus('ok')
-    } catch {
-      setSaveStatus('err')
+      const filename = `请柬-${formData.groom}-${formData.bride}.png`
+      await downloadNodeAsPng(previewRef.current, filename)
+      setDownloadStatus('idle')
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') {
+        setDownloadStatus('idle')
+        return
+      }
+      console.error('下载请柬图片失败', e)
+      setDownloadStatus('err')
     }
-  }
-
-  const handleCopyLink = () => {
-    const url = `${location.origin}${location.pathname}?id=${savedId}`
-    navigator.clipboard.writeText(url)
-  }
-
-  const handleLoadList = () => {
-    if (!listOpen && list.length === 0) {
-      setListLoading(true)
-      getAllInvitations().then(data => {
-        setList(data)
-        setListLoading(false)
-      }).catch(() => setListLoading(false))
-    }
-    setListOpen(!listOpen)
-  }
-
-  const handleSelectInvitation = (item: InvitationResponse) => {
-    setFormData({ ...defaultFormData, ...item.formData })
-    setTemplateId(item.templateId as TemplateId)
-    setListOpen(false)
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-100">
-      <header className="sticky top-0 z-10 backdrop-blur-md bg-white/70 border-b border-gray-200/50 shadow-sm">
+      <header className="hidden lg:block sticky top-0 z-10 backdrop-blur-md bg-white/70 border-b border-gray-200/50 shadow-sm">
         <div className="px-4 sm:px-6 py-4">
           <h1 className="text-xl font-semibold text-gray-800 tracking-tight">
             中式婚礼请柬生成器
@@ -108,7 +127,7 @@ function App() {
         </div>
       </header>
 
-      <div className="flex flex-col lg:flex-row lg:min-h-[calc(100vh-72px)] gap-4 lg:gap-6 p-4 sm:p-6">
+      <div className="flex flex-col lg:flex-row lg:min-h-[calc(100vh-72px)] gap-4 lg:gap-6 p-4 sm:p-6 pb-24 lg:pb-6">
         <aside className="lg:w-[400px] shrink-0 flex flex-col">
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-soft border border-gray-100 p-5 sm:p-6 overflow-y-auto flex-1">
             <section className="mb-6">
@@ -130,6 +149,7 @@ function App() {
               </div>
             </section>
 
+            {/* 云端操作暂时关闭
             <section className="mb-6">
               <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">云端操作</p>
               <div className="flex gap-2">
@@ -192,6 +212,7 @@ function App() {
                 )}
               </div>
             )}
+            */}
 
             <section>
               <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">编辑内容</p>
@@ -201,7 +222,23 @@ function App() {
         </aside>
 
         <main className="flex-1 flex justify-center items-start p-4 sm:p-6 overflow-auto min-h-0">
-          <Preview formData={formData} templateId={templateId} />
+          <div className="flex flex-col items-center gap-4 w-full max-w-[360px]">
+            <div ref={previewRef} className="inline-block">
+              <Preview formData={formData} templateId={templateId} />
+            </div>
+            <div className="fixed inset-x-0 bottom-0 z-20 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-white/90 backdrop-blur border-t border-gray-100 lg:static lg:inset-auto lg:p-0 lg:bg-transparent lg:border-0 lg:backdrop-blur-none lg:w-full">
+              <button
+                onClick={handleDownload}
+                disabled={downloadStatus === 'loading'}
+                className="btn-primary w-full"
+              >
+                {downloadStatus === 'loading' ? '生成图片中...' : '下载图片'}
+              </button>
+              {downloadStatus === 'err' && (
+                <p className="mt-2 text-sm text-center text-rose-600">下载失败，请重试</p>
+              )}
+            </div>
+          </div>
         </main>
       </div>
     </div>

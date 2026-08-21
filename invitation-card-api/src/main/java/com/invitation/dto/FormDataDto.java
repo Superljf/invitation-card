@@ -7,6 +7,10 @@ public class FormDataDto {
     private String recipient;
     private String groom;
     private String bride;
+    /** 敬邀姓名1，默认同新郎 */
+    private String inviteName1;
+    /** 敬邀姓名2，默认同新娘 */
+    private String inviteName2;
     private String solarDate;
     private String solarWeekday;
     private String lunar;
@@ -41,6 +45,22 @@ public class FormDataDto {
 
     public void setBride(String bride) {
         this.bride = bride;
+    }
+
+    public String getInviteName1() {
+        return inviteName1;
+    }
+
+    public void setInviteName1(String inviteName1) {
+        this.inviteName1 = inviteName1;
+    }
+
+    public String getInviteName2() {
+        return inviteName2;
+    }
+
+    public void setInviteName2(String inviteName2) {
+        this.inviteName2 = inviteName2;
     }
 
     public String getSolarDate() {

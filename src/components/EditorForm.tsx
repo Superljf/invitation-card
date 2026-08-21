@@ -10,6 +10,9 @@ export function EditorForm({ data, onChange }: Props) {
   const update = (k: keyof FormData, v: string) => {
     const next = { ...data, [k]: v }
     if (k === 'solarDate') next.solarWeekday = getWeekday(v)
+    // 敬邀姓名未单独改过时，跟随新郎/新娘
+    if (k === 'groom' && data.inviteName1 === data.groom) next.inviteName1 = v
+    if (k === 'bride' && data.inviteName2 === data.bride) next.inviteName2 = v
     onChange(next)
   }
 
@@ -41,6 +44,26 @@ export function EditorForm({ data, onChange }: Props) {
           type="text"
           value={data.bride}
           onChange={e => update('bride', e.target.value)}
+          className="input-modern"
+          placeholder="李四"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">敬邀姓名1</label>
+        <input
+          type="text"
+          value={data.inviteName1}
+          onChange={e => update('inviteName1', e.target.value)}
+          className="input-modern"
+          placeholder="张三"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">敬邀姓名2</label>
+        <input
+          type="text"
+          value={data.inviteName2}
+          onChange={e => update('inviteName2', e.target.value)}
           className="input-modern"
           placeholder="李四"
         />

@@ -96,11 +96,15 @@ export function Template4({ data }: Props) {
                     <div key={i} className="template4-line template4-line--parallel">
                       <div className="template4-line-inner" style={{ 
                         fontFamily: data.nameFont,
+                        fontWeight: 'bold',
+                        fontSize: '1.125rem',
                         ...verticalStyle, 
                         color: lineColor(v, 0) 
                       }}>{line[0]}</div>
                       <div className="template4-line-inner" style={{ 
                         fontFamily: data.nameFont,
+                        fontWeight: 'bold',
+                        fontSize: '1.125rem',
                         ...verticalStyle, 
                         color: lineColor(v, 1) 
                       }}>{line[1]}</div>
