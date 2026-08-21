@@ -33,6 +33,7 @@ export interface Template4Data {
   title: string
   recipientLines: string[]
   recipientVariable: boolean[]
+  honoree: string // 举办对象，接在谨定于前并加粗
   dateLines: LineItem[]
   dateVariable: VariableItem[]
   coupleLines: LineItem[]
@@ -107,10 +108,12 @@ export function mapToTemplate4(f: FormData): Template4Data {
   const [date1, date2, date3] = dateLinesToChinese(f.solarDate, f.lunar)
   const timeZh = timeToChinese(f.time)
   const recipient = f.recipient || '张三先生'
+  const honoree = (f.honoree || '').trim()
   return {
     title: '柬请',
     recipientLines: ['送呈', recipient, '台启'],
     recipientVariable: [false, true, false],
+    honoree,
     dateLines: [date1, [date2, date3]],
     dateVariable: [true, [true, true]],
     coupleLines: ['为', [`${f.groom}`, `${f.bride}`], '举行', f.eventPhrase],

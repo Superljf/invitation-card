@@ -5,6 +5,8 @@ package com.invitation.dto;
  */
 public class FormDataDto {
     private String recipient;
+    /** 举办对象，如 我儿，默认为空 */
+    private String honoree;
     private String groom;
     private String bride;
     /** 敬邀姓名1，默认同新郎 */
@@ -29,6 +31,14 @@ public class FormDataDto {
 
     public void setRecipient(String recipient) {
         this.recipient = recipient;
+    }
+
+    public String getHonoree() {
+        return honoree;
+    }
+
+    public void setHonoree(String honoree) {
+        this.honoree = honoree;
     }
 
     public String getGroom() {

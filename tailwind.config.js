@@ -12,7 +12,7 @@ export default {
         'accent': { DEFAULT: '#e11d48', hover: '#be123c' },
       },
       fontFamily: {
-        serif: ['"Source Han Serif CN"', '"Noto Serif SC"', 'SimSun', 'serif'],
+        serif: ['SimHei', 'STHeiti', '"Heiti SC"', '"STHeitiSC-Medium"'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {

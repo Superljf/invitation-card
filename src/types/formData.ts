@@ -1,6 +1,9 @@
+import { FONT_HEITI, normalizeNameFont } from '../utils/fonts'
+
 /** 统一编辑层数据类型 */
 export interface FormData {
   recipient: string // 送呈对象
+  honoree: string // 举办对象，如 我儿，默认为空
   groom: string
   bride: string
   inviteName1: string // 敬邀姓名1，默认同新郎
@@ -21,6 +24,7 @@ export interface FormData {
 
 export const defaultFormData: FormData = {
   recipient: '张三先生',
+  honoree: '',
   groom: '张三',
   bride: '李四',
   inviteName1: '张三',
@@ -35,17 +39,19 @@ export const defaultFormData: FormData = {
   inviteLine1: '敬备喜筵',
   inviteLine2: '恭请光临',
   inviteClosing: '敬邀',
-  nameFont: "'SimSun', serif",
+  nameFont: FONT_HEITI,
 }
 
 /** 合并请柬数据；旧数据没有敬邀姓名时，回退到新郎/新娘姓名 */
 export function mergeFormData(partial?: Partial<FormData> | null): FormData {
   const merged: FormData = { ...defaultFormData, ...(partial || {}) }
+  if (!merged.honoree) merged.honoree = ''
   if (!partial || !partial.inviteName1) {
     merged.inviteName1 = merged.groom || defaultFormData.inviteName1
   }
   if (!partial || !partial.inviteName2) {
     merged.inviteName2 = merged.bride || defaultFormData.inviteName2
   }
+  merged.nameFont = normalizeNameFont(merged.nameFont)
   return merged
 }

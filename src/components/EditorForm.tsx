@@ -1,5 +1,6 @@
 import type { FormData } from '../types/formData'
 import { getWeekday } from '../utils/weekday'
+import { NAME_FONT_OPTIONS } from '../utils/fonts'
 
 interface Props {
   data: FormData
@@ -26,6 +27,16 @@ export function EditorForm({ data, onChange }: Props) {
           onChange={e => update('recipient', e.target.value)}
           className="input-modern"
           placeholder="张三先生"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">举办对象（选填）</label>
+        <input
+          type="text"
+          value={data.honoree}
+          onChange={e => update('honoree', e.target.value)}
+          className="input-modern"
+          placeholder="我儿"
         />
       </div>
       <div>
@@ -75,12 +86,9 @@ export function EditorForm({ data, onChange }: Props) {
           onChange={e => update('nameFont', e.target.value)}
           className="input-modern"
         >
-          <option value="'SimSun', serif">宋体</option>
-          <option value="'FangSong', serif">仿宋</option>
-          <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
-          <option value="'SimHei', sans-serif">黑体</option>
-          <option value="'KaiTi', serif">楷体</option>
-          <option value="'LiSu', serif">隶书</option>
+          {NAME_FONT_OPTIONS.map(opt => (
+            <option key={opt.label} value={opt.value}>{opt.label}</option>
+          ))}
         </select>
       </div>
       <div>

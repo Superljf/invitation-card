@@ -19,7 +19,8 @@ function renderCol(
   lines: LineItem[],
   variable: VariableItem[],
   colClass: string,
-  customFont?: string
+  customFont?: string,
+  boldPrefix?: string
 ) {
   return (
     <div className={`template4-col ${colClass}`}>
@@ -47,7 +48,12 @@ function renderCol(
               fontFamily: customFont,
               ...verticalStyle, 
               color: lineColor(v) 
-            }}>{line}</div>
+            }}>
+              {i === 0 && boldPrefix ? (
+                <span style={{ fontWeight: 'bold' }}>{boldPrefix}</span>
+              ) : null}
+              {line}
+            </div>
           </div>
         )
       })}
@@ -79,7 +85,7 @@ export function Template4({ data }: Props) {
         <div className="template4-title">{data.title}</div>
         <div className="template4-body">
           {renderSimpleCol(data.recipientLines, data.recipientVariable, 'template4-col--recipient', 'bold', data.nameFont)}
-          {renderCol(data.dateLines, data.dateVariable, 'template4-col--date')}
+          {renderCol(data.dateLines, data.dateVariable, 'template4-col--date', undefined, data.honoree)}
           {renderCol(data.coupleLines, data.coupleVariable, 'template4-col--couple', data.nameFont)}
           {renderSimpleCol(data.inviteLines, data.inviteVariable, 'template4-col--invite')}
           {/* 时间、地点 两列，落款在它们下方 */}
@@ -97,14 +103,14 @@ export function Template4({ data }: Props) {
                       <div className="template4-line-inner" style={{ 
                         fontFamily: data.nameFont,
                         fontWeight: 'bold',
-                        fontSize: '1.125rem',
+                        fontSize: '1.25rem',
                         ...verticalStyle, 
                         color: lineColor(v, 0) 
                       }}>{line[0]}</div>
                       <div className="template4-line-inner" style={{ 
                         fontFamily: data.nameFont,
                         fontWeight: 'bold',
-                        fontSize: '1.125rem',
+                        fontSize: '1.25rem',
                         ...verticalStyle, 
                         color: lineColor(v, 1) 
                       }}>{line[1]}</div>
